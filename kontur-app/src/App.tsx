@@ -6,7 +6,10 @@ import "./style/reset.css"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Form from "./components/form/Form.tsx";
 import MainPage from "./pages/MainPage.tsx";
+import Line from "./components/line/Line.tsx";
 import Competition from "./pages/Competition.tsx";
+import Plot from "./pages/Plot.tsx";
+import Rules from "./pages/Rules.tsx";
 
 function App() {
 
@@ -15,10 +18,11 @@ function App() {
         <>
             <Router>
                 {/*<Login/>*/}
-                <MainPage/>
+                <Competition/>
                 <Routes>
                     <Route path="/form" element=<Form/> />
-                    <Route path="/competition" element=<Competition/> />
+                    <Route path="/mainPage" element=<MainPage/>/>
+                    <Route path="/rules" element=<Rules/>/>
                 </Routes>
             </Router>
         </>
