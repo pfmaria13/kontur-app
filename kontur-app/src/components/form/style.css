@@ -1,0 +1,13 @@
+.form-container {
+    background-color: #ECEAEA;
+    padding: 20px 10px;
+    border-radius: 15px;
+}
+
+.form-header {
+    margin: 20px auto;
+    width: 117px;
+    color: #FE4C4C;
+    font-size: 34px;
+    font-family: "LabGrotesque-Bold", sans-serif;
+}

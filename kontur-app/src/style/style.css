@@ -1,0 +1,66 @@
+@font-face {
+    src: url("../fonts/LabGrotesque-Regular.ttf") format("truetype");
+    font-family: "LabGrotesque-Regular";
+}
+
+@font-face {
+    src: url("../fonts/LabGrotesque-Medium.ttf") format("truetype");
+    font-family: "LabGrotesque-Medium";
+}
+
+@font-face {
+    src: url("../fonts/LabGrotesque-Bold.ttf") format("truetype");
+    font-family: "LabGrotesque-Bold";
+}
+
+
+
+div {
+    font-family: "LabGrotesque-Regular", sans-serif;
+}
+
+.logo {
+    width: 92px;
+}
+
+.main-text {
+    padding: 113px 0 80px;
+    font-family: "LabGrotesque-Medium", sans-serif;
+    font-size: 48px;
+}
+
+.main-page-container {
+    padding: 30px 20px;
+}
+
+.play-button {
+    background-color: #FE4C4C;
+    color: white;
+    display: flex;
+    column-gap: 6px;
+    align-items: center;
+    font-family: "LabGrotesque-Bold", sans-serif;
+    font-size: 23px;
+    padding: 10px 30px;
+    border-radius: 25px;
+}
+
+.play-arrow {
+    width: 24px;
+}
+
+.rules {
+    padding-top: 100px;
+}
+
+.rules-step {
+    font-family: "LabGrotesque-Medium", sans-serif;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+
+.rules-text {
+    padding-bottom: 30px;
+    font-family: "LabGrotesque-Regular", sans-serif;
+    font-size: 18px;
+}
