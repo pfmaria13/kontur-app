@@ -5,9 +5,57 @@
 }
 
 .form-header {
-    margin: 20px auto;
+    margin: 20px auto 0;
     width: 117px;
     color: #FE4C4C;
     font-size: 34px;
     font-family: "LabGrotesque-Bold", sans-serif;
+}
+
+.form-question {
+    font-family: "LabGrotesque-Bold", sans-serif;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.telegram-warning {
+    font-size: 10px;
+    padding-top: 10px;
+    color: #7F7F7F;
+}
+
+.select-course {
+    background-color: white;
+    padding: 10px 12px;
+    border-radius: 5px;
+    width: 100%;
+    color: #7F7F7F;
+    margin-top: 20px;
+}
+
+.list-directions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-top: 20px;
+}
+
+label {
+    display: flex;
+    gap: 10px;
+}
+
+.button-ready {
+    background-color: #FE4C4C;
+    color: white;
+    font-family: "LabGrotesque-Bold", sans-serif;
+    font-size: 19px;
+    padding: 10px 30px;
+    border-radius: 25px;
+    margin: 20px 0;
+}
+
+.warning {
+    font-size: 10px;
+    color: #7F7F7F;
 }

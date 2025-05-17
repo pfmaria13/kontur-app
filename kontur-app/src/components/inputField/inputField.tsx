@@ -7,7 +7,7 @@ interface FieldProps {
     value?: string
 }
 
-const inputField: React.FC<FieldProps> = ({type, onChange, value})  => {
+const inputField: React.FC<FieldProps> = ({type, onChange, value, label})  => {
     return (
         <div className="inputfield-container">
             <input
@@ -16,6 +16,7 @@ const inputField: React.FC<FieldProps> = ({type, onChange, value})  => {
                 required
                 value={value}
                 onChange={onChange}
+                placeholder={label}
             />
 
         </div>
