@@ -9,15 +9,13 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Если в localStorage уже есть telegram — сразу на MainPage
         const telegram = localStorage.getItem("telegram");
         if (telegram) {
-            navigate("/main", { replace: true });
+            navigate("/mainPage", { replace: true });
         }
     }, [navigate]);
 
     const handlePlay = () => {
-        // Если пользователь ещё не в localStorage — идём на форму
         navigate("/form");
     };
 

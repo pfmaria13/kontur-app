@@ -1,5 +1,3 @@
-import {useState} from 'react'
-
 import Login from "./pages/Login.tsx";
 import "./style/style.css"
 import "./style/reset.css"
@@ -19,11 +17,11 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="/form" element={<Form />} />
-                    <Route path="/main" element={<MainPage />} />
-                    <Route path="/competition" element={<Competition />} />
-                    <Route path="/results" element={<Results />} />
+                    <Route path="/" element=<Login/> />
+                    <Route path="/mainPage" element=<MainPage/>/>
+                    <Route path="/rules" element=<Rules/>/>
+                    <Route path="/competition" element=<Competition/>/>
+                    <Route path="/rating" element=<Rating/> />
                 </Routes>
             </Router>
         </>
