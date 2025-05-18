@@ -10,7 +10,7 @@ import Line from "./components/line/Line.tsx";
 import Competition from "./pages/Competition.tsx";
 import Plot from "./pages/Plot.tsx";
 import Rules from "./pages/Rules.tsx";
-import Results from "./pages/Results.tsx";
+import Rating from "./pages/Rating.tsx";
 
 function App() {
 

@@ -1,17 +1,17 @@
-// src/components/line/Line.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface LineProps {
-    word: string;         // UPPERCASE
-    status: string[];     // ['correct'|'present'|'absent']
+    word: string;
+    status: string[];
     isActive: boolean;
     onEnter: (value: string) => void;
-    length: number;       // 5 или 6
 }
 
 const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter, length }) => {
     const [input, setInput] = useState("");
     const ref = useRef<HTMLInputElement>(null);
+const Line: React.FC<LineProps> = ({ word, status, isActive }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (isActive) ref.current?.focus();
@@ -34,6 +34,14 @@ const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter, length }) 
     const disp = isActive ? input : word;
 
     return (
+        <div className="line" onClick={() => inputRef.current?.focus()}>
+            {[0, 1, 2, 3, 4].map(i => (
+                <div
+                    key={i}
+                    className={`square ${status[i] || ''} ${isActive && i === word.length ? 'active' : ''}`}
+                >
+                    {word[i] || ''}
+                    {isActive && i === word.length && <div className="underline" />}
         <div className="line" style={{ display: "grid", gridTemplateColumns: `repeat(${length},1fr)` }}
              onClick={() => ref.current?.focus()}>
             {Array.from({ length }).map((_, i) => (
@@ -43,6 +51,13 @@ const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter, length }) 
                     {isActive && i===input.length && <div className="underline"/>}
                 </div>
             ))}
+            {/* input нужен только для фокуса, не для отображения текста */}
+            <input
+                type="text"
+                ref={inputRef}
+                className="input-letter"
+                value=""
+                readOnly
 
             <input ref={ref}
                    className="input-letter"

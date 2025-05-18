@@ -1,18 +1,24 @@
 import logo from "../img/logo-kontur.png"
 import arrowBack from "../img/arrow-back.png"
-import {NavLink, useNavigate} from "react-router-dom";
 import Form from "../components/form/Form.tsx"
 import example1 from "../img/examle1.png"
 import example2 from "../img/examle2.png"
+import { useNavigate } from 'react-router-dom';
 
 const Rules = () => {
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1); // -1 означает "на одну страницу назад"
+    };
+
     return (
         <div className="rules-page-container container">
             <img src={logo} alt="Логотип" className="logo"/>
-            <div className="rules-top">
+            <button className="rules-top" onClick={handleGoBack}>
                 <img src={arrowBack} alt="" className="arrow-back"/>
                 <h1 className="rules-header">Правила</h1>
-            </div>
+            </button>
             <p className="rules-p">Отгадай существительное в единственном числе с 6-7 попыток. Каждая попытка -
                 существующее слово на 5 или 6 букв.</p>
             <p className="rules-p">После каждой попытки цвет букв будет меняться, показывая, какие буквы есть в

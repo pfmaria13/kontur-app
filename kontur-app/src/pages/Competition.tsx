@@ -1,9 +1,11 @@
-// src/pages/Competition.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Line from "../components/line/Line";
 import ProgressDots from "../components/progress/ProgressDots";
 import logo from "../img/logo-kontur.png";
+import time from "../img/time.png";
+import {NavLink} from "react-router-dom";
+import Keyboard from "../components/keyboard/Keyboard.tsx";
 import timeIcon from "../img/time.png";
 
 interface WordResponse {
@@ -30,12 +32,12 @@ export default function Competition() {
     const [lines, setLines] = useState<string[]>([]);
     const [statuses, setStatuses] = useState<string[][]>([]);
     const [activeLine, setActiveLine] = useState(0);
+    const [currentInput, setCurrentInput] = useState('');
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [startTime, setStartTime] = useState(Date.now());
     const [scores, setScores] = useState<number[]>([]);
     const warningRef = useRef<HTMLDivElement>(null);
 
-    // 1) loading word lists (uppercase)
     useEffect(() => {
         async function loadWordLists() {
             const [a5, a6, i5, i6] = await Promise.all([
@@ -54,7 +56,6 @@ export default function Competition() {
         loadWordLists();
     }, []);
 
-    // 2) fetch new word each round
     useEffect(() => {
         if (!lists) return;
         fetch("http://localhost:3000/word")
@@ -65,7 +66,6 @@ export default function Competition() {
             });
     }, [roundIndex, lists]);
 
-    // 3) init round state
     useEffect(() => {
         if (!target) return;
         const maxAtt = wordLength === 6 ? 7 : 6;
@@ -76,13 +76,11 @@ export default function Competition() {
         setStartTime(Date.now());
     }, [target, wordLength]);
 
-    // 4) timer
     useEffect(() => {
         const id = setInterval(() => setTimeElapsed(t => t + 1), 1000);
         return () => clearInterval(id);
     }, [roundIndex]);
 
-    // scoring
     const calculateScore = (guessed: boolean, used: number, len: number, time: number) => {
         if (!guessed) return 0;
         const base = len === 5 ? 500 : 600;
@@ -92,7 +90,6 @@ export default function Competition() {
         return Math.round(base * attBonus + base * timeBonus);
     };
 
-    // letter statuses
     const getStatuses = (guess: string, tgt: string) => {
         const res = Array(tgt.length).fill("absent");
         const used = Array(tgt.length).fill(false);
@@ -109,7 +106,6 @@ export default function Competition() {
         return res;
     };
 
-    // onEnter
     const handleEnter = (guess: string) => {
         if (!lists) return;
 
@@ -174,6 +170,25 @@ export default function Competition() {
         return `${m}:${sec < 10 ? "0"+sec : sec}`;
     };
 
+    const handleKeyPress = (key: string) => {
+        if (key === 'ENTER') {
+            if (currentInput.length === 5) {
+                handleEnter(currentInput);
+                setCurrentInput('');
+            }
+            return;
+        }
+
+        if (key === 'BACKSPACE') {
+            setCurrentInput(prev => prev.slice(0, -1));
+            return;
+        }
+
+        if (currentInput.length < 5 && /^[А-ЯЁ]$/i.test(key)) {
+            setCurrentInput(prev => prev + key);
+        }
+    };
+
     return (
         <div className="competition-container container">
             <div className="top">
@@ -198,11 +213,16 @@ export default function Competition() {
                         word={line}
                         status={statuses[idx]}
                         isActive={idx===activeLine}
+                        key={index}
+                        word={index === activeLine ? currentInput : line}
+                        status={statuses[index]}
+                        isActive={index === activeLine}
                         onEnter={handleEnter}
                         length={wordLength}
                     />
                 ))}
             </div>
+            <Keyboard onKeyPress={handleKeyPress} />
         </div>
     );
 }
