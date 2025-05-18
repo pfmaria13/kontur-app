@@ -14,11 +14,11 @@ function App() {
     return (
         <>
             <Router>
-                {/*<Login/>*/}
-                <MainPage/>
                 <Routes>
-                    <Route path="/form" element=<Form/> />
-                    <Route path="/competition" element=<Competition/> />
+                    <Route path="/" element={<Login />} />
+                    <Route path="/form" element={<Form />} />
+                    <Route path="/main" element={<MainPage />} />
+                    <Route path="/competition" element={<Competition />} />
                 </Routes>
             </Router>
         </>
