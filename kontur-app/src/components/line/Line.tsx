@@ -1,53 +1,54 @@
+// src/components/line/Line.tsx
 import React, { useEffect, useRef, useState } from 'react';
 
 interface LineProps {
-    word: string;
-    status: string[];
+    word: string;         // UPPERCASE
+    status: string[];     // ['correct'|'present'|'absent']
     isActive: boolean;
     onEnter: (value: string) => void;
+    length: number;       // 5 или 6
 }
 
-const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter }) => {
-    const [input, setInput] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
+const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter, length }) => {
+    const [input, setInput] = useState("");
+    const ref = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (isActive) {
-            inputRef.current?.focus();
-        }
+        if (isActive) ref.current?.focus();
     }, [isActive]);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        const key = e.key.toUpperCase();
-
-        if (key === 'BACKSPACE') {
+    const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const k = e.key.toUpperCase();
+        if (k === "BACKSPACE") {
             setInput(prev => prev.slice(0, -1));
-        } else if (key === 'ENTER') {
-            onEnter(input);
-        } else if (/^[А-ЯЁ]$/.test(key) && input.length < 5) {
-            setInput(prev => prev + key);
+        } else if (k === "ENTER") {
+            if (input.length === length) {
+                onEnter(input);
+                setInput("");
+            }
+        } else if (/^[А-ЯЁ]$/.test(k) && input.length < length) {
+            setInput(prev => prev + k);
         }
     };
 
-    const displayWord = isActive ? input : word;
+    const disp = isActive ? input : word;
 
     return (
-        <div className="line" onClick={() => inputRef.current?.focus()}>
-            {[0, 1, 2, 3, 4].map(i => (
-                <div
-                    key={i}
-                    className={`square ${status[i] || ''} ${isActive && i === input.length ? 'active' : ''}`}
-                >
-                    {displayWord[i] || ''}
-                    {isActive && i === input.length && <div className="underline" />}
+        <div className="line" style={{ display: "grid", gridTemplateColumns: `repeat(${length},1fr)` }}
+             onClick={() => ref.current?.focus()}>
+            {Array.from({ length }).map((_, i) => (
+                <div key={i}
+                     className={`square ${status[i]||""} ${isActive && i===input.length ? "active":""}`}>
+                    {disp[i]||""}
+                    {isActive && i===input.length && <div className="underline"/>}
                 </div>
             ))}
-            <input
-                type="text"
-                ref={inputRef}
-                className="input-letter"
-                onKeyDown={handleKeyDown}
-                value=""
+
+            <input ref={ref}
+                   className="input-letter"
+                   style={{ opacity:0, position:"absolute" }}
+                   onKeyDown={onKey}
+                   value=""
             />
         </div>
     );

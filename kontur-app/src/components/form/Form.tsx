@@ -61,6 +61,7 @@ const Form = () => {
             const result = await response.json();
 
             if (response.ok) {
+                localStorage.setItem("telegram", formData.telegram);
                 navigate("/main");
             } else {
                 alert(result.message || "Ошибка регистрации");
