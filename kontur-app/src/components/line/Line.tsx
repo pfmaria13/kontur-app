@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface LineProps {
     word: string;
@@ -7,8 +7,7 @@ interface LineProps {
     onEnter: (value: string) => void;
 }
 
-const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter }) => {
-    const [input, setInput] = useState('');
+const Line: React.FC<LineProps> = ({ word, status, isActive }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -17,37 +16,24 @@ const Line: React.FC<LineProps> = ({ word, status, isActive, onEnter }) => {
         }
     }, [isActive]);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        const key = e.key.toUpperCase();
-
-        if (key === 'BACKSPACE') {
-            setInput(prev => prev.slice(0, -1));
-        } else if (key === 'ENTER') {
-            onEnter(input);
-        } else if (/^[А-ЯЁ]$/.test(key) && input.length < 5) {
-            setInput(prev => prev + key);
-        }
-    };
-
-    const displayWord = isActive ? input : word;
-
     return (
         <div className="line" onClick={() => inputRef.current?.focus()}>
             {[0, 1, 2, 3, 4].map(i => (
                 <div
                     key={i}
-                    className={`square ${status[i] || ''} ${isActive && i === input.length ? 'active' : ''}`}
+                    className={`square ${status[i] || ''} ${isActive && i === word.length ? 'active' : ''}`}
                 >
-                    {displayWord[i] || ''}
-                    {isActive && i === input.length && <div className="underline" />}
+                    {word[i] || ''}
+                    {isActive && i === word.length && <div className="underline" />}
                 </div>
             ))}
+            {/* input нужен только для фокуса, не для отображения текста */}
             <input
                 type="text"
                 ref={inputRef}
                 className="input-letter"
-                onKeyDown={handleKeyDown}
                 value=""
+                readOnly
             />
         </div>
     );

@@ -10,6 +10,7 @@ import Line from "./components/line/Line.tsx";
 import Competition from "./pages/Competition.tsx";
 import Plot from "./pages/Plot.tsx";
 import Rules from "./pages/Rules.tsx";
+import Rating from "./pages/Rating.tsx";
 
 function App() {
 
@@ -17,12 +18,11 @@ function App() {
     return (
         <>
             <Router>
-                {/*<Login/>*/}
-                <Competition/>
                 <Routes>
-                    <Route path="/form" element=<Form/> />
+                    <Route path="/" element=<Login/> />
                     <Route path="/mainPage" element=<MainPage/>/>
                     <Route path="/rules" element=<Rules/>/>
+                    <Route path="/competition" element=<Competition/>/>
                 </Routes>
             </Router>
         </>

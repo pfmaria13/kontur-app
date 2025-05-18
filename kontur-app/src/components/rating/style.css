@@ -1,0 +1,36 @@
+.rating-line-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+}
+
+.num {
+    width: 30px;
+}
+
+.num-name-container {
+    display: flex;
+}
+
+.rating-line {
+    border: 1px solid #ECEAEA;
+}
+
+.rating-line-container-current {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background-color: #FE4C4C;
+    color: white;
+    width: 100%;
+}
+
+.rating-line-container-current.first-item {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.rating-line-container-current.last-item {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}

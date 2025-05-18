@@ -116,27 +116,6 @@ div {
     margin-bottom: 20px;
 }
 
-.square {
-    background-color: #ECEAEA;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    font-weight: bold;
-    user-select: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.input-letter {
-    position: absolute;
-    opacity: 0;
-    inset: 0;
-    pointer-events: none;
-}
-
 .competition-title {
     font-family: "LabGrotesque-Bold", sans-serif;
     font-size: 36px;
@@ -189,23 +168,6 @@ html {
     max-width: 100%;
 }
 
-.square {
-    position: relative;
-    background-color: #ECEAEA;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    font-weight: bold;
-    user-select: none;
-    cursor: pointer;
-    border-radius: 5px;
-    flex-direction: column; /* для вертикального размещения буквы и линии */
-    padding-bottom: 8px; /* отступ снизу для линии */
-}
-
 .square .underline {
     height: 1px;
     width: 25px;
@@ -215,34 +177,24 @@ html {
     transition: opacity 0.3s;
 }
 
-
 /* Линия видна только для активного квадрата */
 .square.active .underline {
     opacity: 1;
 }
 
 .square.correct {
-    background-color: #6aaa64; /* зелёный */
+    background-color: #64B419;
     color: white;
 }
 
 .square.present {
-    background-color: #c9b458; /* оранжевый/жёлтый */
+    background-color: #FC7630;
     color: white;
 }
 
 .square.absent {
     background-color: #ECEAEA; /* серый — уже по умолчанию */
     color: black;
-}
-
-
-
-.line {
-    display: flex;
-    column-gap: 15px;
-    position: relative;
-    margin-bottom: 20px;
 }
 
 .square {
@@ -259,7 +211,6 @@ html {
     cursor: pointer;
     border-radius: 5px;
     position: relative;
-    padding-bottom: 8px;
 }
 
 .underline {
@@ -307,10 +258,6 @@ html {
 
 }
 
-.arrow-back {
-    margin-right: 80px;
-}
-
 .rules-header {
     font-family: "LabGrotesque-Bold", sans-serif;
     font-size: 36px;
@@ -319,6 +266,7 @@ html {
 .arrow-back {
     width: 24px;
     height: 24px;
+    margin-right: 80px;
 }
 
 .rules-top {
@@ -348,5 +296,49 @@ html {
     display: inline;
 }
 
+.rating-main-text {
+    font-size: 24px;
+    width: 350px;
+    padding: 50px 0 10px;
+    text-align: center;
+}
+
+.rating-score {
+    font-size: 70px;
+    font-family: "LabGrotesque-Bold", sans-serif;
+    color: #FE4C4C;
+    padding-bottom: 20px;
+}
+
+.general-rating-text {
+    font-size: 20px;
+    font-family: "LabGrotesque-Bold", sans-serif;
+    padding-bottom: 20px;
+    padding-top: 30px;
+}
+
+.rating-top {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.general-rating {
+    border: 1px solid #ECEAEA;
+    border-radius: 6px;
+}
+
+.play-again {
+    display: flex;
+    align-items: center;
+    background-color: #7F7F7F;
+    color: white;
+    padding: 10px 30px;
+    gap: 6px;
+    border-radius: 30px;
+    font-family: "LabGrotesque-Bold", sans-serif;
+    font-size: 23px;
+    margin-bottom: 10px;
+}
 
 

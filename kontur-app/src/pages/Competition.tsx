@@ -4,6 +4,7 @@ import ProgressDots from "../components/progress/ProgressDots.tsx";
 import logo from "../img/logo-kontur.png";
 import time from "../img/time.png";
 import {NavLink} from "react-router-dom";
+import Keyboard from "../components/keyboard/Keyboard.tsx";
 
 const TARGET_WORD = 'АДМИН';
 
@@ -12,6 +13,7 @@ const Competition = () => {
     const [lines, setLines] = useState<string[]>(Array(5).fill(''));
     const [statuses, setStatuses] = useState<(string[])[]>(Array(5).fill([]));
     const [activeLine, setActiveLine] = useState(0);
+    const [currentInput, setCurrentInput] = useState('');
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -41,6 +43,25 @@ const Competition = () => {
     const guessedWords = statuses.filter(s => s.length === 5 && s.every(ch => ch === 'correct')).length;
     const activeDots = Math.min(guessedWords + 1, 5);
 
+    const handleKeyPress = (key: string) => {
+        if (key === 'ENTER') {
+            if (currentInput.length === 5) {
+                handleEnter(currentInput);
+                setCurrentInput('');
+            }
+            return;
+        }
+
+        if (key === 'BACKSPACE') {
+            setCurrentInput(prev => prev.slice(0, -1));
+            return;
+        }
+
+        if (currentInput.length < 5 && /^[А-ЯЁ]$/i.test(key)) {
+            setCurrentInput(prev => prev + key);
+        }
+    };
+
     return (
         <div className="competition-container container">
             <div className="top">
@@ -60,13 +81,14 @@ const Competition = () => {
                 {lines.map((line, index) => (
                     <Line
                         key={index}
-                        word={line}
+                        word={index === activeLine ? currentInput : line}
                         status={statuses[index]}
                         isActive={index === activeLine}
                         onEnter={handleEnter}
                     />
                 ))}
             </div>
+            <Keyboard onKeyPress={handleKeyPress} />
         </div>
     );
 };
